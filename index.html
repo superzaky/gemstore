@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!-- ng app is another directive -->
+<html ng-app="store"> 
+	<head>
+		<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+	</head>
+	<!-- ng controller is also another directive -->
+	<body ng-controller="StoreController as store">
+		<div ng-repeat="product in store.products">
+			<!-- <div ng-hide="store.product.soldOut"> -->
+				<h1>{{product.name}}</h1>
+				<h2>{{product.price | currency}}</h2>
+				<p>{{product.description}}</p>
+				<button ng-show="product.canPurchase"> Add to cart </button>
+			<!--</div>-->
+			<script type="text/javascript" src="angular.min.js"></script>
+			<script type="text/javascript" src="app.js"></script>
+			<p>{{"Hello" + " you"}}</p>
+		<!-- ng-init allows to evaluate an expression in the current scope -->
+		<section ng-init="tab =1">
+			<ul class="nav nav-pills">
+				<li><a href ng-click="tab = 1">Description</a></li>
+				<li><a href ng-click="tab = 2">specifications</a></li>
+				<li><a href ng-click="tab = 3">reviews</a></li>
+			</ul>
+
+			{{tab}}
+
+			<div class="panel" ng-show= "tab === 1">
+				<h4>Description</h4>
+				<p>{{product.description}}</p>
+			</div>			
+			<div class="panel" ng-show= "tab === 2">
+				<h4>Specifications</h4>
+				<blockquote>None yet</blockquote>
+			</div>
+			<div class="panel" ng-show= "tab === 3">
+				<h4>Reviews</h4>
+				<blockquote>None yet</blockquote>
+			</div>
+		</section>
+		</div>
+	</body>
+</html>
