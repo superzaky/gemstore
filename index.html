@@ -3,6 +3,7 @@
 <html ng-app="store"> 
 	<head>
 		<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<!-- ng controller is also another directive -->
 	<body ng-controller="StoreController as store">
@@ -16,35 +17,56 @@
 			<script type="text/javascript" src="angular.min.js"></script>
 			<script type="text/javascript" src="app.js"></script>
 			<p>{{"Hello" + " you"}}</p>
-		<!-- ng-init allows to evaluate an expression in the current scope -->
-		<section ng-init="tab =1" ng-controller="PanelController as panel">
-			<ul class="nav nav-pills">
-				<li ng-class="{ active: panel.isSelected(1)}">
-					<a href ng-click="panel.selectTab(1)">Description</a>
-				</li>
-				<li ng-class="{ active:panel.isSelected(2)}">
-					<a href ng-click="panel.selectTab(2)">specifications</a>
-				</li>
-				<li ng-class="{ active:panel.isSelected(3)}">
-					<a href ng-click="panel.selectTab(3)">reviews</a>
-				</li>
-			</ul>
+			<!-- ng-init allows to evaluate an expression in the current scope -->
+			<section ng-init="tab =1" ng-controller="PanelController as panel">
+				<ul class="nav nav-pills">
+					<li ng-class="{ active: panel.isSelected(1)}">
+						<a href ng-click="panel.selectTab(1)">Description</a>
+					</li>
+					<li ng-class="{ active:panel.isSelected(2)}">
+						<a href ng-click="panel.selectTab(2)">specifications</a>
+					</li>
+					<li ng-class="{ active:panel.isSelected(3)}">
+						<a href ng-click="panel.selectTab(3)">reviews</a>
+					</li>
+				</ul>
 
-			{{tab}}
+				{{tab}}
 
-			<div class="panel" ng-show="panel.isSelected(1)">
-				<h4>Description</h4>
-				<p>{{product.description}}</p>
-			</div>			
-			<div class="panel" ng-show="panel.isSelected(2)">
-				<h4>Specifications</h4>
-				<blockquote>None yet</blockquote>
-			</div>
-			<div class="panel" ng-show="panel.isSelected(3)">
-				<h4>Reviews</h4>
-				<blockquote>None yet</blockquote>
-			</div>
-		</section>
+				<div class="panel" ng-show="panel.isSelected(1)">
+					<h4>Description</h4>
+					<p>{{product.description}}</p>
+				</div>			
+				<div class="panel" ng-show="panel.isSelected(2)">
+					<h4>Specifications</h4>
+					<blockquote>None yet</blockquote>
+				</div>
+				<div class="panel" ng-show="panel.isSelected(3)">
+					<h4>Reviews</h4>
+					<blockquote>None yet</blockquote>
+				</div>				
+				<blockquote ng-repeat="review in product.reviews">
+					<b>Stars: {{review.stars}}</b>
+					{{review.body}}
+					<cite>by: {{review.author}}</cite>
+				</blockquote>
+				<form name="reviewForm">
+					<blockquote>
+						<b>Stars: {{review.stars}}</b>
+						{{review.body}}
+						<cite>by: {{review.author}}</cite>
+					</blockquote>
+					<!-- ng-model binds the form element value to the review.stars property (ook dit heet 2-way data binding)-->
+					<select class="form-control" ng-model="review.stars">
+						<option value="1">1 star</option>
+						<option value="2">2 stars</option>
+					</select>
+					<textarea class="form-control" ng-model="review.body"></textarea>
+					<label>by: </label>
+					<input class="form-control" ng-model="review.author" type="email" />
+					<input class="btn btn-primary pull-right" type="submit" value="Submit" />
+				</form>
+			</section>
 		</div>
 	</body>
 </html>
