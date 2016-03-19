@@ -50,20 +50,23 @@
 					{{review.body}}
 					<cite>by: {{review.author}}</cite>
 				</blockquote>
-				<form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(product)">
+				<form name="reviewForm" ng-controller="ReviewController as reviewCtrl"
+					ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
 					<blockquote>
 						<b>Stars: {{reviewCtrl.review.stars}}</b>
 						{{reviewCtrl.review.body}}
 						<cite>by: {{reviewCtrl.review.author}}</cite>
 					</blockquote>
 					<!-- ng-model binds the form element value to the review.stars property (ook dit heet 2-way data binding)-->
-					<select class="form-control" ng-model="reviewCtrl.review.stars">
+					<select class="form-control" ng-model="reviewCtrl.review.stars" required>
 						<option value="1">1 star</option>
 						<option value="2">2 stars</option>
 					</select>
-					<textarea class="form-control" ng-model="reviewCtrl.review.body"></textarea>
+					<textarea class="form-control" ng-model="reviewCtrl.review.body" required></textarea>
 					<label>by: </label>
-					<input class="form-control" ng-model="reviewCtrl.review.author" type="email" />
+					<input class="form-control" ng-model="reviewCtrl.review.author" type="email" required/>
+					<!-- Print forms validity (het print true of false). En de $valid variabel is van Angular zelf afkomstig. -->
+					<div>reviewForm is {{reviewForm.$valid}}</div>
 					<input class="btn btn-primary pull-right" type="submit" value="Submit" />
 				</form>
 			</section>
