@@ -9,8 +9,13 @@
 	<body ng-controller="StoreController as store">
 		<div ng-repeat="product in store.products">
 			<!-- <div ng-hide="store.product.soldOut"> -->
-				<h1>{{product.name}}</h1>
-				<h2>{{product.price | currency}}</h2>
+				<!-- Element directive -->
+				<product-title></product-title>
+				<!-- Attribute directive -->
+				<!--<h3 product-title></h3> -->
+				<!-- ng-include is expecting a variable with the name of the file to include. 
+				To pass the name directly as a string, use single quotes ('...') -->
+				<!--<h3 ng-include="'product-title.html'"></h3>-->
 				<p>{{product.description}}</p>
 				<button ng-show="product.canPurchase"> Add to cart </button>
 			<!--</div>-->
