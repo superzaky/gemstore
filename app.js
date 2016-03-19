@@ -11,6 +11,18 @@
 			//here we specify the url of a template we want this directive to load into the page. In this case product-title.html.
 			templateUrl: 'product-title.html'
 		};
+	});	
+
+	app.directive('productPanels', function(){
+		return{
+			restrict: 'E',
+			templateUrl: 'product-panels.html',
+			controller: function(){
+
+			},
+			//Controller Alias
+			controllerAs: 'panels'
+		};
 	});
 
 	app.controller('StoreController', function(){ //anonymous function wordt uitgevoerd wnnr de StoreController wordt aangeroepen.
