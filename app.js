@@ -2,9 +2,17 @@
 (function(){
 	var app = angular.module('store', [ 'store-products' ]); //In the array you can define dependencies (other libraries we might need)
 
-	app.controller('StoreController', function(){ //anonymous function wordt uitgevoerd wnnr de StoreController wordt aangeroepen.
-		this.products = gems;
-	});
+	app.controller('StoreController', ['$http', function($http){ //anonymous function wordt uitgevoerd wnnr de StoreController wordt aangeroepen.
+		//this.products = gems;
+		var store = this;
+		/*We need to initialize products to an empty array, since the page will render before our data returns from our 
+		GET request. (Als we dit doen voorkomen we ook dat we een error krijgen als de pagina laadt.)*/
+		store.products = [];
+
+		$http.get('./products.json').success(function(data){
+			store.products = data;
+		});
+	}]);
 
 	var gems = [
 		{
